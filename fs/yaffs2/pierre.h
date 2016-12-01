@@ -1,0 +1,6 @@
+#ifndef YAFFS2_PIERRE_H
+#define YAFFS2_PIERRE_H
+
+#define YAFFS2_DISABLE_RA	0
+
+#endif /* YAFFS2_PIERRE_H */
