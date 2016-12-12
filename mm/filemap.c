@@ -36,12 +36,7 @@
 #include <linux/mm_inline.h> /* for page_is_file_cache() */
 #include "internal.h"
 
-//samupd
-#include "lynx/ElementsSructs.h"
-#include "lynx/FileLinkedListOperations.h"
-#include "lynx/PageLinkedListOperations.h"
-#include "lynx/TransitionLinkedListOperations.h"
-#include "lynx/TransitionTableOperations.h"
+
 
 
 /*
@@ -1440,6 +1435,8 @@ static int page_cache_read(struct file *file, pgoff_t offset)
 
 	} while (ret == AOP_TRUNCATED_PAGE);
 		
+		
+		
 	return ret;
 }
 
@@ -1457,11 +1454,6 @@ static int page_cache_read(struct file *file, pgoff_t offset)
  * it in the page cache, and handles the special cases reasonably without
  * having a lot of duplicated code.
  */
-  FileNode *filesListHead = NULL;
-  FileNode *currentFileNode = NULL;
-  PageNode *currentPageNode = NULL;
-  int sourcePage = -1;
-  int destinationPage = -1;
  
 int filemap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
@@ -1476,13 +1468,7 @@ int filemap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	int ret = 0;
 
 
-//samupd 
-       printk(KERN_INFO " requested fils %s \n", file->f_dentry->d_name.name);
-       printk(KERN_INFO " requested paGe %lu \n", vmf->pgoff);
-       currentFileNode = insertFileNode(&filesListHead , file->f_dentry->d_name.name);
-       destinationPage = vmf->pgoff; //to do : change int to ul
-       insertInTransitionTable(currentFileNode , sourcePage, destinationPage);
-       destinationPage = sourcePage;
+
        
        
 	size = (i_size_read(inode) + PAGE_CACHE_SIZE - 1) >> PAGE_CACHE_SHIFT;
