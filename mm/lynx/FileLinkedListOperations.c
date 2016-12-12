@@ -1,9 +1,9 @@
 #include "FileLinkedListOperations.h"
 
 
-FileNode* newFileNode(char* name){
+FileNode* newFileNode(const unsigned char* name){
   FileNode* node = NULL;
-  node = kmalloc(sizeof(FileNode));
+  node = kmalloc(sizeof(FileNode), GFP_KERNEL);
   node->filename = name;
   node->lastPage = -1;
   node->listPage = NULL;

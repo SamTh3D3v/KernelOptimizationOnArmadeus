@@ -2,7 +2,7 @@
 
 PageNode* newPageNode(int id){
   PageNode * node = NULL;
-  node = kmalloc(sizeof(PageNode));
+  node = kmalloc(sizeof(PageNode), GFP_KERNEL);
   node->pageId = id;
   node->pageCount = 0;
   node->listTransitions = NULL;

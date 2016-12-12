@@ -4,7 +4,7 @@
 #include "ElementsSructs.h"
 
 
-FileNode* newFileNode(char * name);
+FileNode* newFileNode(const unsigned char* name);
 char* GetFileName(FileNode* node);
 FileNode* GetNextFileNode(FileNode* node);
 void AffectNextFile(FileNode *fileNode, FileNode *nextFileNode);

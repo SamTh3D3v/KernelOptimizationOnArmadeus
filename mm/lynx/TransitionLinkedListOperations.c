@@ -3,7 +3,7 @@
 TransitionNode* newTransitionNode(int id){
 
   TransitionNode * node = NULL;
-  node = kmalloc(sizeof(TransitionNode));
+  node = kmalloc(sizeof(TransitionNode), GFP_KERNEL);
   node->pageId = id;
   node->transCount=1;
   node->next = NULL;
