@@ -28,7 +28,7 @@ void AffectNextFile(FileNode *fileNode, FileNode *nextFileNode){
 }
 
 //look for a file node, insert a new one if it didn't exist
-FileNode* insertFileNode(FileNode** filesListHead , char* fileName){
+FileNode* insertFileNode(FileNode** filesListHead ,const unsigned char* fileName){
     FileNode* node = NULL;
     FileNode* parentNode=NULL;
     //search the node

@@ -1,8 +1,6 @@
 #ifndef ELEMENTSSTRUCTS_H_INCLUDED
 #define ELEMENTSSTRUCTS_H_INCLUDED
 
-#include <stdio.h>
-#include <stdlib.h>
 
 typedef struct FileNode FileNode;
 typedef struct PageNode PageNode;

@@ -8,7 +8,7 @@ FileNode* newFileNode(char * name);
 char* GetFileName(FileNode* node);
 FileNode* GetNextFileNode(FileNode* node);
 void AffectNextFile(FileNode *fileNode, FileNode *nextFileNode);
-FileNode* insertFileNode(FileNode** filesListHead , char* fileName);
+FileNode* insertFileNode(FileNode** filesListHead ,const unsigned char* fileName);
 void PrintFilesList(FileNode *head);
 int deleteFileNode(char* fileName);
 
