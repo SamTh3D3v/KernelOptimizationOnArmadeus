@@ -1461,6 +1461,10 @@ int filemap_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 	int did_readaround = 0;
 	int ret = 0;
 
+
+//samupd 
+       printk(KERN_INFO " requested fils %s \n", file->f_dentry->d_name.name);
+       printk(KERN_INFO " requested paGe %lu \n", vmf->pgoff);
 	size = (i_size_read(inode) + PAGE_CACHE_SIZE - 1) >> PAGE_CACHE_SHIFT;
 	if (vmf->pgoff >= size)
 		return VM_FAULT_SIGBUS;
