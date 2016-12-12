@@ -3,7 +3,7 @@
 
 FileNode* newFileNode(char* name){
   FileNode* node = NULL;
-  node = malloc(sizeof(FileNode));
+  node = kmalloc(sizeof(FileNode));
   node->filename = name;
   node->lastPage = -1;
   node->listPage = NULL;
@@ -61,12 +61,12 @@ void PrintFilesList(FileNode *head){
 
     if(head==NULL)
         return;
-    printf("\n |");
+    printk(KERN_INFO "\n |");
     while(node != NULL){
-        printf(" %s ->", node->filename);
+        printk(KERN_INFO " %s ->", node->filename);
         node=GetNextFileNode(node);
     }
-    printf("| \n");
+    printk(KERN_INFO "| \n");
 }
 
 int deleteFileNode(char* fileName){

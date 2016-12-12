@@ -2,7 +2,7 @@
 
 PageNode* newPageNode(int id){
   PageNode * node = NULL;
-  node = malloc(sizeof(PageNode));
+  node = kmalloc(sizeof(PageNode));
   node->pageId = id;
   node->pageCount = 0;
   node->listTransitions = NULL;
@@ -58,12 +58,12 @@ void PrintPagesList(PageNode *head){
     node= head;
     if(head==NULL)
         return;
-    printf("\n |");
+    printk(KERN_INFO "\n |");
     while(node != NULL){
-        printf(" %ld : %ld ->", node->pageId, node->pageCount);
+        printk(KERN_INFO " %ld : %ld ->", node->pageId, node->pageCount);
         node = GetNextPageNode(node);
     }
-    printf("| \n");
+    printk(KERN_INFO "| \n");
 }
 
 

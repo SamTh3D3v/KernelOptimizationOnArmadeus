@@ -3,7 +3,7 @@
 TransitionNode* newTransitionNode(int id){
 
   TransitionNode * node = NULL;
-  node = malloc(sizeof(TransitionNode));
+  node = kmalloc(sizeof(TransitionNode));
   node->pageId = id;
   node->transCount=1;
   node->next = NULL;
@@ -55,16 +55,16 @@ TransitionNode* InsertTransNode(PageNode* pageNode , int transId){
 
 void PrintTransList(PageNode *head){
     TransitionNode* node=NULL;
-    printf("\n Page %ld :", head->pageId);
+    printk(KERN_INFO "\n Page %ld :", head->pageId);
     node= head->listTransitions;
     if(node==NULL)
         return;
-    printf("\n |");
+    printk(KERN_INFO "\n |");
     while(node != NULL){
-        printf(" %ld : %ld->", node->pageId, node->transCount);
+        printk(KERN_INFO " %ld : %ld->", node->pageId, node->transCount);
         node = GetNextTransNode(node);
     }
-    printf("| \n");
+    printk(KERN_INFO "| \n");
 }
 
 

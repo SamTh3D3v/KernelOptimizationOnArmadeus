@@ -29,11 +29,11 @@ void PrintTransTable(FileNode *fNode){
     TransitionNode* node = NULL;
     FileNode* fileshead = NULL;
 
-    printf("\n File : %s ", fNode->filename);
+    printk(KERN_INFO "\n File : %s ", fNode->filename);
     node= fNode->listPage;
     if(node==NULL)
         return;
-    printf("\n -> ");
+    printk(KERN_INFO "\n -> ");
     while(node != NULL){
         PrintTransList(node);
         node = GetNextPageNode(node);
