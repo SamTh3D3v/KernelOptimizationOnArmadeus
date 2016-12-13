@@ -2,6 +2,7 @@
 #define ELEMENTSSTRUCTS_H_INCLUDED
 #include <stddef.h>
 #include <linux/slab.h>
+# include "../../include/linux/seq_file.h"
 
 typedef struct FileNode FileNode;
 typedef struct PageNode PageNode;

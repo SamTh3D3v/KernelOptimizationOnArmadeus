@@ -10,4 +10,5 @@ void AffectNextTrans(TransitionNode *transNode, TransitionNode *nextTransNode);
 TransitionNode* InsertTransNode(PageNode* pageNode , int transId);
 int DeleteTransitionNode(int transitionId);
 void PrintTransList(PageNode *head);
+void PrintTransList_seq(PageNode *head, struct seq_file *m);
 #endif // TRANSITIONLINKEDLISTOPERATIONS_H_INCLUDED

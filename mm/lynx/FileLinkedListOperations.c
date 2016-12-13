@@ -69,6 +69,23 @@ void PrintFilesList(FileNode *head){
     printk(KERN_INFO "| \n");
 }
 
+void PrintFileTransitions_seq(FileNode *fNode, struct seq_file *m){
+   PageNode* node = NULL;
+    FileNode* fileshead = NULL;
+
+    seq_printf(m, "\n File : %s ", fNode->filename);
+    node= fNode->listPage;
+    if(node==NULL)
+        return;
+    seq_printf(m, "\n -> ");
+    while(node != NULL){
+        PrintTransList_seq(node, m);
+        node = GetNextPageNode(node);
+    }
+}
+
+
+
 int deleteFileNode(char* fileName){
 //to do
 }

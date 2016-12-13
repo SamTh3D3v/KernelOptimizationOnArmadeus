@@ -67,6 +67,20 @@ void PrintTransList(PageNode *head){
     printk(KERN_INFO "| \n");
 }
 
+void PrintTransList_seq(PageNode *head, struct seq_file *m){
+    TransitionNode* node=NULL;
+    seq_printf(m,"\n Page %ld :", head->pageId);
+    node= head->listTransitions;
+    if(node==NULL)
+        return;
+    seq_printf(m,"\n |");
+    while(node != NULL){
+        seq_printf(m," %ld : %ld->", node->pageId, node->transCount);
+        node = GetNextTransNode(node);
+    }
+    seq_printf(m,"| \n");
+}
+
 
 int DeleteTransitionNode(int transitionId){
  //to do
