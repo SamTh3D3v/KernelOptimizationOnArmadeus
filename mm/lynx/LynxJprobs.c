@@ -90,24 +90,18 @@ static ssize_t lynx_monitor_proc_write(struct file* file, const char* buf, size_
         return len ;
 }
 
-
-
 int filemap_fault_handler(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
   struct file *file = vma->vm_file;
-  
-//printk(KERN_INFO "Lynx: filemap_fault is executed\n") ;
-
-       //printk(KERN_INFO "LYNXN: requested fils %s \n",file->f_dentry->d_name.name);
-       //printk(KERN_INFO "LYNXN: requested paGe %lu \n",vmf->pgoff);
-       currentFileNode = insertFileNode(&filesListHead , file->f_dentry->d_name.name);
-       destinationPage = vmf->pgoff; //to do : change int to ul
-       insertInTransitionTable(currentFileNode , sourcePage, destinationPage);
-       sourcePage = destinationPage;
-
-
-jprobe_return () ;
-return 0;
+  //printk(KERN_INFO "Lynx: filemap_fault is executed\n") ;
+  //printk(KERN_INFO "LYNXN: requested fils %s \n",file->f_dentry->d_name.name);
+  //printk(KERN_INFO "LYNXN: requested paGe %lu \n",vmf->pgoff);
+  currentFileNode = insertFileNode(&filesListHead , file->f_dentry->d_name.name);
+  destinationPage = vmf->pgoff; //to do : change int to ul
+  insertInTransitionTable(currentFileNode , sourcePage, destinationPage);
+  sourcePage = destinationPage;
+  jprobe_return () ;
+  return 0;
 }
 
 static void *lynx_events_seq_start(struct seq_file *s, loff_t *pos)
@@ -138,18 +132,7 @@ static void lynx_events_seq_stop(struct seq_file *m, void *v)
 }
 
 static int lynx_events_seq_show(struct seq_file *m, void *v)
-{
-//printk(KERN_INFO "LYNX: Lynx events seq_stop is executed \n");
-      	FileNode *head =( FileNode *)v;
-	if(filesListHead == NULL)
-          printk(KERN_INFO "LYNX: In show filesListHead is NULL \n");
-	/*if(head->filename == NULL)
-          printk(KERN_INFO "LYNX: In show head->filename  is NULL \n");*/
-	if(head == NULL)
-          printk(KERN_INFO "LYNX: In show head  is NULL \n");
-	//printf the transition inside a file 
-	
-	seq_printf(m,"\n Yo motherfuckers %s\n", filesListHead->filename);
+{	
 	PrintListFileTransitions_seq(filesListHead, m);	
 	return 0;
 }
@@ -178,8 +161,6 @@ static void __exit Lynx_exit (void)
  unregister_jprobe(&jprobe_filemap_fault) ;
  printk(KERN_INFO "LYNX : Module LYNX decharge \ n " ) ;
 }
-
-
 
 module_init(lynx_init);
 module_exit(Lynx_exit);
