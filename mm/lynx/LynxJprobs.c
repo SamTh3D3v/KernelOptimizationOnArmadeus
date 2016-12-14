@@ -73,11 +73,15 @@ static int event_rpos = 0;
 static int event_wpos = 0;
 FileNode *procFilesListHead = NULL; //used to print the list to proc
 
+/* Arret de l'excution des handlers des jprobe*/
+static unsigned int stop=0;
+
 
 static int lynx_monitor_proc_open(struct inode *inode, struct  file *file)
 {
 	printk(KERN_INFO "PROC : open proc\n");
-	return seq_open(file, &lynx_events_seq_ops);
+	return single_open(file, lynx_events_seq_show,NULL);
+	//return seq_open(file, &lynx_events_seq_ops);
 }
 static ssize_t lynx_monitor_proc_write(struct file* file, const char* buf, size_t len, loff_t* offset)
 {
@@ -92,10 +96,10 @@ int filemap_fault_handler(struct vm_area_struct *vma, struct vm_fault *vmf)
 {
   struct file *file = vma->vm_file;
   
-printk(KERN_INFO "Lynx: filemap_fault is executed\n") ;
+//printk(KERN_INFO "Lynx: filemap_fault is executed\n") ;
 
-       printk(KERN_INFO "LYNX: requested fils %s \n",file->f_dentry->d_name.name);
-       printk(KERN_INFO "LYNX: requested paGe %lu \n",vmf->pgoff);
+       //printk(KERN_INFO "LYNXN: requested fils %s \n",file->f_dentry->d_name.name);
+       //printk(KERN_INFO "LYNXN: requested paGe %lu \n",vmf->pgoff);
        currentFileNode = insertFileNode(&filesListHead , file->f_dentry->d_name.name);
        destinationPage = vmf->pgoff; //to do : change int to ul
        insertInTransitionTable(currentFileNode , sourcePage, destinationPage);
@@ -108,36 +112,47 @@ return 0;
 
 static void *lynx_events_seq_start(struct seq_file *s, loff_t *pos)
 {
+       // printk(KERN_INFO "LYNX: Lynx events seq_start is executed \n");
+       if(filesListHead == NULL)
+          printk(KERN_INFO "LYNX: filesListHead is NULL \n");
 	procFilesListHead = filesListHead;
 	return procFilesListHead;
 }
 
 static void *lynx_events_seq_next(struct seq_file *m, void *v, loff_t *pos)
 {
-	if(procFilesListHead->next !=NULL){
+        printk(KERN_INFO "LYNX: Lynx events seq next is executed \n");
+	if(procFilesListHead == NULL)
+          printk(KERN_INFO "LYNX: procFilesListHead is NULL \n");
+	/*if(procFilesListHead->next !=NULL){
 	  procFilesListHead =procFilesListHead->next;
 	  return procFilesListHead;
-	}	
-	return NULL;
+	}*/	
+	return procFilesListHead;
 }
 
 static void lynx_events_seq_stop(struct seq_file *m, void *v)
 {
+        //printk(KERN_INFO "LYNX: Lynx events seq_stop is executed \n");
    	seq_printf(m,"\n---------------------------------------------------\n");
 }
 
 static int lynx_events_seq_show(struct seq_file *m, void *v)
 {
-
+//printk(KERN_INFO "LYNX: Lynx events seq_stop is executed \n");
       	FileNode *head =( FileNode *)v;
+	if(filesListHead == NULL)
+          printk(KERN_INFO "LYNX: In show filesListHead is NULL \n");
+	/*if(head->filename == NULL)
+          printk(KERN_INFO "LYNX: In show head->filename  is NULL \n");*/
+	if(head == NULL)
+          printk(KERN_INFO "LYNX: In show head  is NULL \n");
 	//printf the transition inside a file 
-	PrintFileTransitions_seq(head, m);	
-	return 1;
+	
+	seq_printf(m,"\n Yo motherfuckers %s\n", filesListHead->filename);
+	PrintFileTransitions_seq(filesListHead, m);	
+	return 0;
 }
-
-
-
-
 
 static int __init lynx_init (void)
 {
@@ -150,7 +165,7 @@ static int __init lynx_init (void)
  }
  //proc entry point 
 if (proc_create(PROC_FILE,S_IWUGO|S_IRUGO,NULL,&lynx_monitor_proc_fops)== NULL){
-   printk ( " ERROR - proc_create () failed \ n " ) ;
+   printk (KERN_INFO " ERROR - proc_create () failed \ n " ) ;
    return -1;
 }
  printk ( KERN_INFO "LYNX : Module LYNX charge \ n " ) ;
