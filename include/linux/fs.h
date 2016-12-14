@@ -9,6 +9,8 @@
 #include <linux/limits.h>
 #include <linux/ioctl.h>
 
+
+
 /*
  * It's silly to have NR_OPEN bigger than NR_FILE, but you can change
  * the file limit at runtime and only root can increase the per-process
@@ -33,6 +35,8 @@
 #define SEEK_CUR	1	/* seek relative to current file position */
 #define SEEK_END	2	/* seek relative to end of file */
 #define SEEK_MAX	SEEK_END
+
+
 
 /* And dynamically-tunable limits and defaults: */
 struct files_stat_struct {
@@ -743,6 +747,8 @@ enum inode_i_mutex_lock_class
 
 extern void inode_double_lock(struct inode *inode1, struct inode *inode2);
 extern void inode_double_unlock(struct inode *inode1, struct inode *inode2);
+ 
+ 
 
 /*
  * NOTE: in a 32bit arch with a preemptable kernel and

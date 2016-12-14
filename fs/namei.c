@@ -39,6 +39,8 @@ struct Fichier *fichier;
 EXPORT_SYMBOL(fichier);
 
 
+
+
 /* [Feb-1997 T. Schoebel-Theuer]
  * Fundamental changes in the pathname lookup mechanisms (namei)
  * were necessary because of omirr.  The reason is that omirr needs

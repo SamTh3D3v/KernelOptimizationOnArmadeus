@@ -20,6 +20,9 @@ int main(int argc, char const *argv[])
     size = s.st_size;
 
     f = (char *) mmap (0, size, PROT_READ, MAP_PRIVATE, fd, 0);
+    
+    madvise(f,size,MADV_SEQUENTIAL);
+    
     for ( i = 0; i < size; i++) {
         char c;
 

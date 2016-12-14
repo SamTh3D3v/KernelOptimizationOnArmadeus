@@ -16,6 +16,10 @@
 #include <linux/task_io_accounting_ops.h>
 #include <linux/pagevec.h>
 #include <linux/pagemap.h>
+#include "lynx/ElementsSructs.h"
+
+
+
 
 void default_unplug_io_fn(struct backing_dev_info *bdi, struct page *page)
 {
@@ -125,12 +129,19 @@ __do_page_cache_readahead(struct address_space *mapping, struct file *filp,
 			pgoff_t offset, unsigned long nr_to_read,
 			unsigned long lookahead_size)
 {
+	
 	struct inode *inode = mapping->host;
 	struct page *page;
 	unsigned long end_index;	/* The last page we want to read */
 	LIST_HEAD(page_pool);
 	int page_idx;
 	int ret = 0;
+	
+	
+	//FIND file-> name in out list
+	//find the page (offset) in the trans tables 
+	//load the next pages (prediction )
+	
 	loff_t isize = i_size_read(inode);
 
 	if (isize == 0)
