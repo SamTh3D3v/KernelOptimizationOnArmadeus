@@ -50,6 +50,7 @@ TransitionNode* InsertTransNode(PageNode* pageNode , int transId){
     node= newTransitionNode(transId);
     AffectNextTrans(parentTrans, node);
     pageNode->pageCount +=1;
+        
     return node;
 }
 
@@ -71,8 +72,10 @@ void PrintTransList_seq(PageNode *head, struct seq_file *m){
     TransitionNode* node=NULL;
     seq_printf(m,"\n Page %ld :", head->pageId);
     node= head->listTransitions;
-    if(node==NULL)
+    if(node==NULL){
+      printk(KERN_INFO " Something is wrong man \n");
         return;
+      }
     seq_printf(m,"\n |");
     while(node != NULL){
         seq_printf(m," %ld : %ld->", node->pageId, node->transCount);

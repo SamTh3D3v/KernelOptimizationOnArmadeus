@@ -13,6 +13,7 @@ void AffectNextFile(FileNode *fileNode, FileNode *nextFileNode);
 FileNode* insertFileNode(FileNode** filesListHead ,const unsigned char* fileName);
 void PrintFilesList(FileNode *head);
 void PrintFileTransitions_seq(FileNode *fNode, struct seq_file *m);
+void PrintListFileTransitions_seq(FileNode *fNode, struct seq_file *m);
 int deleteFileNode(char* fileName);
 
 #endif // FILELINKEDLISTOPERATIONS_H_INCLUDED

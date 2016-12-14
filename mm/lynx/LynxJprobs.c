@@ -103,7 +103,7 @@ int filemap_fault_handler(struct vm_area_struct *vma, struct vm_fault *vmf)
        currentFileNode = insertFileNode(&filesListHead , file->f_dentry->d_name.name);
        destinationPage = vmf->pgoff; //to do : change int to ul
        insertInTransitionTable(currentFileNode , sourcePage, destinationPage);
-       destinationPage = sourcePage;
+       sourcePage = destinationPage;
 
 
 jprobe_return () ;
@@ -150,7 +150,7 @@ static int lynx_events_seq_show(struct seq_file *m, void *v)
 	//printf the transition inside a file 
 	
 	seq_printf(m,"\n Yo motherfuckers %s\n", filesListHead->filename);
-	PrintFileTransitions_seq(filesListHead, m);	
+	PrintListFileTransitions_seq(filesListHead, m);	
 	return 0;
 }
 
