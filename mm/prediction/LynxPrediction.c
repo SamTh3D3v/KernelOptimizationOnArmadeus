@@ -80,7 +80,7 @@ __do_page_cache_readahead_handler(struct address_space *mapping, struct file *fi
 	      if(tnode == NULL) {
 		printk(KERN_INFO "\n No prediction is availble \n");
 	      }else{
-		printk(KERN_INFO "\n The current page is : [%ld], the next page to load is : [%ld], and the proba is : [%ld]/[%ld]\n",offset,tnode->pageId,tnode->transCount,pnode->pageCount);
+		printk(KERN_INFO "\n The next page to load is : [%ld], and the proba is : [%ld]/[%ld]\n",tnode->pageId,tnode->transCount,pnode->pageCount);
 		
 	      }
 	    }	   	   

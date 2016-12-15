@@ -41,10 +41,10 @@ static const struct file_operations lynx_monitor_proc_fops =
 
 static struct seq_operations lynx_events_seq_ops =
 {
-	.start = lynx_events_seq_start, /* La fonction start permet d ’ initialiser la lecture */
-	.next  = lynx_events_seq_next,/* Verifier s’il reste encore des données à lire et donne l’adresse de l’élément suivant à lire */
-	.stop  = lynx_events_seq_stop, /* Vérifie la condition darrêt de la boucle de lecture */
-	.show  = lynx_events_seq_show,  /* Fonction d’affichage du contenu*/
+	.start = lynx_events_seq_start,                   /* La fonction start permet d ’ initialiser la lecture */
+	.next  = lynx_events_seq_next,                     /* des données à lire et donne l’adresse de l’élément suivant à lire */
+	.stop  = lynx_events_seq_stop,                      /* Vérifie la condition darrêt de la boucle de lecture */
+	.show  = lynx_events_seq_show,                       /* Fonction d’affichage du contenu*/
 };
 static struct jprobe jprobe_filemap_fault = {
 .entry = filemap_fault_handler ,
